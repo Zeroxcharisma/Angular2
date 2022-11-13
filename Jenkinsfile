@@ -13,18 +13,18 @@ pipeline {
             
             }
         }
-      stage('Build 1 ') {
+      stage('Build Stage ') {
             steps {
                 script{
                     
                     sh "ansible-playbook Ansible/build.yml -i Ansible/inventory/host.yml -e ansible_become_password=root "
                 }}}
-      stage('Build 2 ') {
+      stage('Docker build image ') {
             steps {
                 script{
                     sh "ansible-playbook Ansible/docker.yml -i Ansible/inventory/host.yml -e ansible_become_password=root "
                 }}}
-      stage('Build 3 ') {
+      stage('docker push image') {
             steps {
                 script{
                     sh "ansible-playbook Ansible/docker-registry.yml -i Ansible/inventory/host.yml -e ansible_become_password=root"
